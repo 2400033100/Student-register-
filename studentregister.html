@@ -1,0 +1,45 @@
+import React, { useState } from "react";
+
+const AttendanceTracker = () => {
+  // Sample student list
+  const students = ["Aarav", "Diya", "Karan", "Meera", "Ravi"];
+
+  // State to track attendance
+  const [presentStudents, setPresentStudents] = useState([]);
+
+  // Function to handle checkbox toggle
+  const handleCheckboxChange = (student) => {
+    if (presentStudents.includes(student)) {
+      // Remove if unchecked
+      setPresentStudents(presentStudents.filter((s) => s !== student));
+    } else {
+      // Add if checked
+      setPresentStudents([...presentStudents, student]);
+    }
+  };
+
+  return (
+    <div style={{ fontFamily: "Arial", textAlign: "center", marginTop: "40px" }}>
+      <h2>🎓 Attendance Tracker</h2>
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        {students.map((student) => (
+          <li key={student} style={{ margin: "10px 0" }}>
+            <label>
+              <input
+                type="checkbox"
+                checked={presentStudents.includes(student)}
+                onChange={() => handleCheckboxChange(student)}
+              />
+              {"  "}{student}
+            </label>
+          </li>
+        ))}
+      </ul>
+      <h3>
+        ✅ Total Present: {presentStudents.length} / {students.length}
+      </h3>
+    </div>
+  );
+};
+
+export default AttendanceTracker;
